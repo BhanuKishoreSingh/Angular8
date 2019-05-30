@@ -1,0 +1,4 @@
+/* Add application styles & imports to this file! */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';

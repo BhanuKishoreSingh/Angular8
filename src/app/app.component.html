@@ -1,0 +1,110 @@
+<p id="first-row">
+  Absence Date <input type="text">
+</p>
+<app-custom-stepper>
+	<cdk-step [stepControl]="frmStep1" #step1="cdkStep">
+    <ng-template cdkStepLabel>Step1</ng-template>
+		<form #frmStep1="ngForm">
+			<p>Is this the first day of absence for this incident?</p>
+			<div *ngFor="let statusOption of statusOptions">
+					<input type="radio" [value]='statusOption' name="statusOption" (change)="getResponse($event.target.value)"><span>{{statusOption}}</span><br>
+			</div>
+		</form>
+		<button cdkStepperPrevious class="btn btn-primary" id="first">Prev</button>
+		<button cdkStepperNext class="btn btn-primary">Next</button>
+	</cdk-step>
+	<cdk-step #step2="cdkStep" *ngIf="this.intermittentStatus">
+			<form #frmStep2="ngForm">
+					<p>Is the absence related to a previously reported intermittent absence?</p>
+					<div *ngFor="let statusOption of statusOptions">
+							<input type="radio" [value]='statusOption' name="statusOption" (change)="getIntermittentStatusResponse($event.target.value)"><span>{{statusOption}}</span><br>
+					</div>
+					<div class="modal-dialog" *ngIf="this.displayIntermittentModal">
+						<div class="modal-header">
+							<h4 class="modal-title pull-left">
+								Intermittent Modal pop up
+							</h4>
+						</div>
+						<div class="modal-body">
+								Intermittent Screen comes here
+						</div>
+					</div>
+					<div class="modal-dialog" *ngIf="this.errorModal">
+							<div class="modal-header">
+								<h4 class="modal-title pull-left">
+									Error Modal pop up
+								</h4>
+							</div>
+							<div class="modal-body">
+									Error Screen comes here
+							</div>
+						</div>
+				</form>
+			<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+			<button cdkStepperNext class="btn btn-primary">Next</button>
+		</cdk-step>
+	<cdk-step cdkStep #step3="cdkStep">
+			<form #frmStep3="ngForm">
+					<p>Is this absence for a Paid Sick Leave Law(PSL)?</p>
+					<div *ngFor="let statusOption of statusOptions">
+							<input type="radio" [value]='statusOption' name="statusOption" (change)="getResponsePSL($event.target.value)"><span>{{statusOption}}</span><br>
+					</div>
+				</form>
+		<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+		<button cdkStepperNext class="btn btn-primary">Next</button>
+	</cdk-step>
+	<cdk-step cdkStep #step4="cdkStep">
+			<form #frmStep4="ngForm">
+				<p>Return Date <input type="text"></p>
+					<input type="radio" name="yes" value="yes"/> Employee has returned<br>
+					<input type="radio" name="no" value="no"/> Return date is expected<br>
+				</form>
+		<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+		<button cdkStepperNext class="btn btn-primary">Next</button>
+	</cdk-step>
+	<cdk-step cdkStep #step5="cdkStep">
+			<form #frmStep5="ngForm">
+				<p>Reason for Absence</p>
+				<div><span>Please select from the dropdown</span></div>
+				<br>
+				<select (change)="getReasonStatusResponse($event.target.value)" class="dropdown">
+					<option *ngFor="let dropdownOption of dropdownOptions"><span>{{dropdownOption}}</span></option>
+				</select>
+				</form>
+		<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+		<button cdkStepperNext class="btn btn-primary">Next</button>
+	</cdk-step>
+	<cdk-step cdkStep #step6="cdkStep" *ngIf="this.workIncidentStatus">
+			<form #frmStep6="ngForm">
+				<p>Reason for Absence</p>
+				<p>Is the absence related to a work related accident?</p>
+				<div *ngFor="let statusOption of statusOptions">
+						<input type="radio" [value]='statusOption' name="statusOption" (change)="getResponse($event.target.value)"><span>{{statusOption}}</span><br>
+				</div>
+				</form>
+		<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+		<button cdkStepperNext class="btn btn-primary">Next</button>
+	</cdk-step>
+	<cdk-step cdkStep #step7="cdkStep">
+			<form #frmStep7="ngForm">
+				<p>Reason for Absence</p>
+					<p>Will the absence be greater than 3 consecutive days?</p>
+					<div *ngFor="let statusOption of statusOptions">
+							<input type="radio" [value]='statusOption' name="statusOption" (change)="getResponse($event.target.value)"><span>{{statusOption}}</span><br>
+					</div>
+				</form>
+		<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+		<button cdkStepperNext class="btn btn-primary">Next</button>
+	</cdk-step>
+	<cdk-step cdkStep #step8="cdkStep">
+			<form #frmStep8="ngForm">
+				<p>Reason for Absence</p>
+				<p>Is the absence related to a previously reported intermittent absence?</p>
+				<div *ngFor="let statusOption of statusOptions">
+						<input type="radio" [value]='statusOption' name="statusOption" (change)="getResponse($event.target.value)"><span>{{statusOption}}</span><br>
+				</div>
+				</form>
+		<button cdkStepperPrevious class="btn btn-primary">Prev</button>
+		<button cdkStepperNext class="btn btn-primary" id="last">Submit</button>
+	</cdk-step>
+</app-custom-stepper>
